@@ -1,0 +1,75 @@
+# Docker Compose configuration for Axis Skynet LLM IDE Platform
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: llm_playground
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - llm-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d llm_playground"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: llm_backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://user:password@postgres:5432/llm_playground
+      SSL_MODE: disable
+      JWT_SECRET_KEY: VdjVpKp-c8TI1-5sr4SMvB4BpL5mAtqequROig_k63c=
+      ENCRYPTION_KEY: vafb1MNFUoJDJ90DRXnzZ0V4H1Ty1VZa0l5HQE7yxY8=
+      PGHOST: postgres
+      PGPORT: 5432
+      PGUSER: user
+      PGPASSWORD: password
+      PGDATABASE: llm_playground
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - llm-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    command: >
+      sh -c "sleep 10 && python main.py"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: llm_frontend
+    ports:
+      - "5000:5000"
+    environment:
+      BACKEND_URL: http://llm_backend:8000
+      NEXT_PUBLIC_BACKEND_URL: http://localhost:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - llm-network
+
+volumes:
+  postgres_data:
+
+networks:
+  llm-network:
+    driver: bridge

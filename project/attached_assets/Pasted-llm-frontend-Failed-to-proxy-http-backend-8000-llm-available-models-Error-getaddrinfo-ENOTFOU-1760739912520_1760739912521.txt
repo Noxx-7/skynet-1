@@ -1,0 +1,26 @@
+llm_frontend  | Failed to proxy http://backend:8000/llm/available-models [Error: getaddrinfo ENOTFOUND backend] {
+llm_frontend  |   errno: -3008,
+llm_frontend  |   code: 'ENOTFOUND',                                                                                                                                                                                           
+llm_frontend  |   syscall: 'getaddrinfo',                                                                                                                                                                                      
+llm_frontend  |   hostname: 'backend'                                                                                                                                                                                          
+llm_frontend  | }                                                                                                                                                                                                              
+llm_frontend  | [Error: getaddrinfo ENOTFOUND backend] {                                                                                                                                                                       
+llm_frontend  |   errno: -3008,                                                                                                                                                                                                
+llm_frontend  |   code: 'ENOTFOUND',                                                                                                                                                                                           
+llm_frontend  |   syscall: 'getaddrinfo',                                                                                                                                                                                      
+llm_frontend  |   hostname: 'backend'
+llm_frontend  | } 
+
+llm_frontend  | Failed to proxy http://backend:8000/code/generate-tests [Error: getaddrinfo ENOTFOUND backend] {                                                                                                               
+llm_frontend  |   errno: -3008,
+llm_frontend  |   code: 'ENOTFOUND',                                                                                                                                                                                           
+llm_frontend  |   syscall: 'getaddrinfo',
+llm_frontend  |   hostname: 'backend'                                                                                                                                                                                          
+llm_frontend  | }                                                                                                                                                                                                              
+llm_frontend  | [Error: getaddrinfo ENOTFOUND backend] {
+llm_frontend  |   errno: -3008,                                                                                                                                                                                                
+llm_frontend  |   code: 'ENOTFOUND',                                                                                                                                                                                           
+llm_frontend  |   syscall: 'getaddrinfo',                                                                                                                                                                                      
+llm_frontend  |   hostname: 'backend'
+llm_frontend  | }  
+

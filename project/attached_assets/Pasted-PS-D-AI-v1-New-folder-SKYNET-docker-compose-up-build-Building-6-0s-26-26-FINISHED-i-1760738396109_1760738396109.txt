@@ -1,0 +1,84 @@
+PS D:\AI\v1\New folder\SKYNET> docker-compose up --build
+[+] Building 6.0s (26/26) FINISHED
+ => [internal] load local bake definitions                                                                                                                                                                                0.0s
+ => => reading from stdin 987B                                                                                                                                                                                            0.0s
+ => [frontend internal] load build definition from Dockerfile                                                                                                                                                             0.0s
+ => => transferring dockerfile: 384B                                                                                                                                                                                      0.0s
+ => [backend internal] load build definition from Dockerfile                                                                                                                                                              0.0s
+ => => transferring dockerfile: 464B                                                                                                                                                                                      0.0s
+ => [backend internal] load metadata for docker.io/library/python:3.11-slim                                                                                                                                               1.5s
+ => [frontend internal] load metadata for docker.io/library/node:18-alpine                                                                                                                                                1.5s
+ => [auth] library/python:pull token for registry-1.docker.io                                                                                                                                                             0.0s
+ => [auth] library/node:pull token for registry-1.docker.io                                                                                                                                                               0.0s
+ => [frontend internal] load .dockerignore                                                                                                                                                                                0.0s
+ => => transferring context: 212B                                                                                                                                                                                         0.0s
+ => [backend internal] load .dockerignore                                                                                                                                                                                 0.0s
+ => => transferring context: 319B                                                                                                                                                                                         0.0s
+ => [frontend 1/7] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e                                                                                          0.1s
+ => => resolve docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e                                                                                                   0.1s
+ => [frontend internal] load build context                                                                                                                                                                                0.0s
+ => => transferring context: 1.04kB                                                                                                                                                                                       0.0s
+ => [backend 1/6] FROM docker.io/library/python:3.11-slim@sha256:ff8533f48e12b705fc20d339fde2ec61d0b234dd9366bab3bc84d7b70a45c8c0                                                                                         0.1s
+ => => resolve docker.io/library/python:3.11-slim@sha256:ff8533f48e12b705fc20d339fde2ec61d0b234dd9366bab3bc84d7b70a45c8c0                                                                                                 0.1s 
+ => [backend internal] load build context                                                                                                                                                                                 0.0s 
+ => => transferring context: 463B                                                                                                                                                                                         0.0s 
+ => CACHED [backend 2/6] WORKDIR /app                                                                                                                                                                                     0.0s 
+ => CACHED [backend 3/6] RUN apt-get update && apt-get install -y     gcc     g++     && rm -rf /var/lib/apt/lists/*                                                                                                      0.0s 
+ => CACHED [backend 4/6] COPY requirements.txt .                                                                                                                                                                          0.0s 
+ => CACHED [backend 5/6] RUN pip install --no-cache-dir -r requirements.txt                                                                                                                                               0.0s 
+ => CACHED [backend 6/6] COPY . .                                                                                                                                                                                         0.0s 
+ => [backend] exporting to image                                                                                                                                                                                          0.2s 
+ => => exporting layers                                                                                                                                                                                                   0.0s 
+ => => exporting manifest sha256:a99a2f01ecaf50c3b5e09e603b6478a1212c2f748b52b10b9e6ac945b45b6f2a                                                                                                                         0.0s 
+ => => exporting config sha256:0e24df32e09911ad6a5a5dd8cf07f858a9d45289af63ef7a459180eba2401c33                                                                                                                           0.0s 
+ => => exporting attestation manifest sha256:9e77f60d497295a323c5f396c209385df54d058a7b4390355c7f1b68c4204c2f                                                                                                             0.1s 
+ => => exporting manifest list sha256:ac5c80e7502b56c53d363f44bdac8d11813723f3d6f85754cf615489c8e56d4f                                                                                                                    0.0s 
+ => => naming to docker.io/library/skynet-backend:latest                                                                                                                                                                  0.0s 
+ => => unpacking to docker.io/library/skynet-backend:latest                                                                                                                                                               0.0s 
+ => CACHED [frontend 2/7] WORKDIR /app                                                                                                                                                                                    0.0s 
+ => CACHED [frontend 3/7] COPY package*.json ./                                                                                                                                                                           0.0s 
+ => CACHED [frontend 4/7] RUN npm install                                                                                                                                                                                 0.0s 
+ => CACHED [frontend 5/7] COPY . .                                                                                                                                                                                        0.0s 
+ => CACHED [frontend 6/7] RUN mkdir -p lib components                                                                                                                                                                     0.0s 
+ => ERROR [frontend 7/7] RUN npm run build                                                                                                                                                                                4.0s 
+ => [backend] resolving provenance for metadata file                                                                                                                                                                      0.0s 
+------
+ > [frontend 7/7] RUN npm run build:
+0.787
+0.787 > llm-playground-frontend@1.0.0 build
+0.787 > next build
+0.787
+1.754 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+1.754 This information is used to shape Next.js' roadmap and prioritize features.
+1.754 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+1.754 https://nextjs.org/telemetry
+1.754
+1.889    ▲ Next.js 15.5.6
+1.889
+2.032    Creating an optimized production build ...
+3.888  ⨯ code-editor/page.tsx doesn't have a root layout. To fix this error, make sure every page has a root layout.
+3.919 Next.js build worker exited with code: 1 and signal: null
+------
+Dockerfile:18
+
+--------------------
+
+  16 |
+
+  17 |     # Build the application
+
+  18 | >>> RUN npm run build
+
+  19 |
+
+  20 |     # Expose port
+
+--------------------
+
+target frontend: failed to solve: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+
+
+
+View build details: docker-desktop://dashboard/build/default/default/jfvedezl6qoxeceeh5iqyx6rc
+
+PS D:\AI\v1\New folder\SKYNET> 

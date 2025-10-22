@@ -1,0 +1,102 @@
+PS D:\AI\v1\v1\SKYNET\SKYNET\SKYNET> docker-compose up --build
+[+] Building 13.6s (26/26) FINISHED
+ => [internal] load local bake definitions                                                                                                                                                                            0.0s
+ => => reading from stdin 1.02kB                                                                                                                                                                                      0.0s
+ => [backend internal] load build definition from Dockerfile                                                                                                                                                          0.0s
+ => => transferring dockerfile: 464B                                                                                                                                                                                  0.0s
+ => [frontend internal] load build definition from Dockerfile                                                                                                                                                         0.0s
+ => => transferring dockerfile: 384B                                                                                                                                                                                  0.0s
+ => [backend internal] load metadata for docker.io/library/python:3.11-slim                                                                                                                                           1.7s
+ => [frontend internal] load metadata for docker.io/library/node:18-alpine                                                                                                                                            1.7s
+ => [auth] library/python:pull token for registry-1.docker.io                                                                                                                                                         0.0s
+ => [auth] library/node:pull token for registry-1.docker.io                                                                                                                                                           0.0s
+ => [backend internal] load .dockerignore                                                                                                                                                                             0.0s
+ => => transferring context: 2B                                                                                                                                                                                       0.0s
+ => [frontend internal] load .dockerignore                                                                                                                                                                            0.0s
+ => => transferring context: 2B                                                                                                                                                                                       0.0s
+ => [backend internal] load build context                                                                                                                                                                             0.1s
+ => => transferring context: 108.84kB                                                                                                                                                                                 0.0s
+ => [backend 1/6] FROM docker.io/library/python:3.11-slim@sha256:ff8533f48e12b705fc20d339fde2ec61d0b234dd9366bab3bc84d7b70a45c8c0                                                                                     0.1s
+ => => resolve docker.io/library/python:3.11-slim@sha256:ff8533f48e12b705fc20d339fde2ec61d0b234dd9366bab3bc84d7b70a45c8c0                                                                                             0.1s
+ => [frontend 1/7] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e                                                                                      0.1s
+ => => resolve docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e                                                                                               0.1s 
+ => [frontend internal] load build context                                                                                                                                                                            0.1s 
+ => => transferring context: 214.40kB                                                                                                                                                                                 0.1s 
+ => CACHED [backend 2/6] WORKDIR /app                                                                                                                                                                                 0.0s 
+ => CACHED [backend 3/6] RUN apt-get update && apt-get install -y     gcc     g++     && rm -rf /var/lib/apt/lists/*                                                                                                  0.0s 
+ => CACHED [backend 4/6] COPY requirements.txt .                                                                                                                                                                      0.0s 
+ => CACHED [backend 5/6] RUN pip install --no-cache-dir -r requirements.txt                                                                                                                                           0.0s 
+ => [backend 6/6] COPY . .                                                                                                                                                                                            0.1s 
+ => CACHED [frontend 2/7] WORKDIR /app                                                                                                                                                                                0.0s 
+ => CACHED [frontend 3/7] COPY package*.json ./                                                                                                                                                                       0.0s 
+ => CACHED [frontend 4/7] RUN npm install                                                                                                                                                                             0.0s 
+ => [frontend 5/7] COPY . .                                                                                                                                                                                           0.1s 
+ => [backend] exporting to image                                                                                                                                                                                      0.4s 
+ => => exporting layers                                                                                                                                                                                               0.2s 
+ => => exporting manifest sha256:d84554521b5b14c0ff224eb87389237055ac951f570f0e975c85b232a5438b57                                                                                                                     0.0s 
+ => => exporting config sha256:d3d9384f14823aeacb087d1f98218bafff700780b18abb8c09c9b874be1a8886                                                                                                                       0.0s 
+ => => exporting attestation manifest sha256:ac16f28485bcb7e90ea942cea036fd0446f896fcb68a9ebc9b9fee45eb1b54b6                                                                                                         0.0s 
+ => => exporting manifest list sha256:25dc82c1884ab3c795fdba749cf2e940b07cd94bf32eb1961731ca853bb622e7                                                                                                                0.0s 
+ => => naming to docker.io/library/skynet-backend:latest                                                                                                                                                              0.0s 
+ => => unpacking to docker.io/library/skynet-backend:latest                                                                                                                                                           0.1s 
+ => [frontend 6/7] RUN mkdir -p lib components                                                                                                                                                                        0.6s 
+ => [backend] resolving provenance for metadata file                                                                                                                                                                  0.0s 
+ => ERROR [frontend 7/7] RUN npm run build                                                                                                                                                                           10.1s 
+------
+ > [frontend 7/7] RUN npm run build:
+1.088
+1.088 > llm-playground-frontend@1.0.0 build
+1.088 > next build
+1.088
+2.261 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+2.262 This information is used to shape Next.js' roadmap and prioritize features.
+2.262 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+2.262 https://nextjs.org/telemetry
+2.262
+2.412    ▲ Next.js 15.5.6
+2.412
+2.552    Creating an optimized production build ...
+9.981 Failed to compile.
+9.981
+9.981 ./app/code-editor/page.tsx
+9.981 Error:   x Expected '}', got '<eof>'
+9.981     ,-[/app/app/code-editor/page.tsx:54:1]
+9.981  51 |   const [performanceMetrics, setPerformanceMetrics] = useState<PerformanceMetrics | null>(null);
+9.981  52 |   const [loading, setLoading] = useState(false);
+9.981  53 |   const [loadingTests, setLoadingTests] = useState(false);
+9.981  54 |   const [activeTab, setActiveTab] = useState<'output' | 'tests' | 'performance'>('output');
+9.981     :                                                                                            ^
+9.981     `----
+9.981
+9.981 Caused by:
+9.981     Syntax Error
+9.981
+9.981 Import trace for requested module:
+9.981 ./app/code-editor/page.tsx
+9.981
+10.01
+10.02 > Build failed because of webpack errors
+------
+Dockerfile:18
+
+--------------------
+
+  16 |
+
+  17 |     # Build the application
+
+  18 | >>> RUN npm run build
+
+  19 |
+
+  20 |     # Expose port
+
+--------------------
+
+target frontend: failed to solve: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+
+
+
+View build details: docker-desktop://dashboard/build/default/default/kco691w91ui9c4mnmodb11nie
+
+PS D:\AI\v1\v1\SKYNET\SKYNET\SKYNET> 
